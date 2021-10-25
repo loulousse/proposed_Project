@@ -1,0 +1,62 @@
+<!--
+           <style>
+        body{
+            background-color: rgb(49, 100, 117);
+            
+        }
+
+        footer{
+            margin-top: auto;
+        }
+        h1   {color: rgb(0, 0, 0);}
+        h2   {color: #FFCCCC;}
+        h3 	 {color: cyan;}
+        h5	 {color: yellow;}
+        h6   {color: #FFCCFF;}
+        p    {color: white;}  
+        </style>  
+          <legend ><a href=""><i class=""></i></a> Sign up!</legend>
+-->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            Beep Ticketing System
+        </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">    
+        
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+        
+        <style>
+            h1{color: rgb(218, 22, 22);}
+            p{color: #FFCCCC;}
+        
+            h3{color: rgb(115, 255, 255);}
+            h4{color:rgb(243, 92, 92)}
+            h5{color: yellow;}
+            h6{color: #FFCCFF;}
+        </style>
+    </head>
+    <body>
+        {% include 'beep/navbar.html' %}
+        <div class="container-fluid">
+            {% block content %}
+
+            {% endblock %}
+        </div> 
+      
+        <hr>
+        <footer>
+            <h5>
+                &nbsp;&nbsp;&nbsp;&nbsp;Hannah Lou S. Laquinon CSIT327 G1-C1 AY 2021-2022
+            </h5>
+        </footer>
+    </body>  
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+</html>

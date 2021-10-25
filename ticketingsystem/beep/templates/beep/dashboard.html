@@ -1,0 +1,485 @@
+{% extends 'beep/main.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/> 
+<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script> 
+ 
+
+<div style = 'background-color:#FFDFD3;'>
+    <center>
+        <p>
+            <h2>
+                USERS
+            </h2>
+        </p>
+    </center>
+</div>
+<div>
+    <p align = "right">
+        <a type = "button" class = "btn btn-primary" id = "id_signin" 
+        href = "{% url 'user_info' %}">
+        add user
+        </a>
+    </p>
+</div>
+<table style = 'text-align:center' class = "table table-primary table-striped">
+    <thead>
+    <tr>
+      <th class = "text-center">User ID</th>
+      <th class = "text-center">First Name</th>
+      <th class = "text-center">Last Name</th>
+      <th class = "text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for u in users %}
+    <tr>
+      <td>{{u.userId}}</td>
+      <td>{{u.fname}}</td>
+      <td>{{u.lname}}</td>
+      <td>
+        <a type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#newModal-{{u.userId}}">
+            VIEW
+        </a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-{{u.userId}}">
+            DELETE
+        </button>
+      </td>
+    </tr>
+
+     <!-- Modal VIEW-->
+    <div class="modal fade" id="newModal-{{u.userId}}" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:rgb(115, 255, 255)">
+              <h5 class="modal-title", style="font-size: large; font-family: Trirong;">VIEW DETAILS</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form id="updateForm" method="post" >
+            {% csrf_token %}
+            <div class="modal-body">
+              <input type="text" name="user-Id" value = {{u.userId}} hidden>
+              <div class="row" text-align ="center">
+                <div class="col-12" id="startup-tab-1">
+                    <div class="row">
+                      <div class = "col-sm-4">
+                        <input type="text" class="form-control" id="id-firstname" placeholder="Firstname" name="u-fname" value ={{u.fname}}>
+                      </div>
+                      </div>
+                      &nbsp;
+                      <div class="row">
+                      <div class = "col-sm-4">
+                        <input type="text" class="form-control" id="id-lastname" placeholder="Lastname"  name="u-lname" value ={{u.lname}}>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">  
+                <button type="submit" id = "btnUpdate" name = "btnUpdate" class="button">UPDATE</button>                                  
+                <button type="button" class="button btn-secondary" data-dismiss="modal">CLOSE</button>                          
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    
+    <!-- Modal DELETE-->
+    <div class="modal fade" id="exampleModal-{{u.userId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:rgb(115, 255, 255)">
+              <h5 class="modal-title", style="font-size: large; font-family: Trirong;">DELETE RECORD</h5>
+              <!--<h5 class="modal-title" id="exampleModalLabel">DELETE RECORD</h5>-->
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form id="deleteForm" method="post" >
+            {% csrf_token %} 
+            <div class="modal-body">                       
+              <input type="text" name="uuser-Id" value = {{u.userId}} hidden>
+              Are you sure you want to delete this record?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+              <button type="submit" id = "btnDelete" name = "btnDelete" class="btn btn-primary">YES</button>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>   
+    {% endfor %}   
+  </tbody>
+</table>
+
+<div style = 'background-color:#FFDFD3;'>
+    <center>
+        <p>
+            <h2>
+                ROUTE
+            </h2>
+        </p>
+    </center>
+</div>
+<div>
+    <p>
+        <h5>
+          
+        </h5>
+    </p>
+</div>
+
+<table style = 'text-align:center' class = "table table-secondary table-striped" style = "width:50%">
+    <thead>
+    <tr>
+      <th class = "text-center">Route From</th>
+      <th class = "text-center">Route To</th>
+      <th class = "text-center">Fare</th>
+      <th class = "text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for r in routes %}
+    <tr>
+     <!--
+           <th scope="col">Route ID</th>
+      <th scope="col">User ID</th>
+          <td>{{r.routeId}}</td>
+      <td>{{r.userId_id}}</td>
+        <td>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            update
+        </button> 
+      </td>
+     -->
+
+      <td>{{r.route_from}}</td>
+      <td>{{r.route_to}}</td>
+      <td>{{r.fare}}</td>
+      <td>
+        <a type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#newModal1-{{r.routeId}}">
+            VIEW
+        </a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1-{{r.routeId}}">
+            DELETE
+        </button>
+      </td>
+    </tr>
+
+     <!-- Modal VIEW-->
+    <div class="modal fade" id="newModal1-{{r.routeId}}" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:rgb(115, 255, 255)">
+              <h5 class="modal-title", style="font-size: large; font-family: Trirong;">VIEW DETAILS</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form id="updateForm" method="post" >
+            {% csrf_token %}
+            <div class="modal-body">
+              <input type="text" name="route-Id" value = {{r.routeId}} hidden>
+              <div class="row" text-align ="center">
+                <div class="col-12" id="startup-tab-1">
+                    <div class = "row"></div>
+                      <div class = "col-sm-4">
+                        <input type="text" class="form-control" id="id-location" placeholder="Location" name="r-route_from" value ={{r.route_from}}>
+                      </div>
+
+                      <div class = "row"></div>
+                      <div class = "col-sm-4">
+                        <input type="text" class="form-control" id="id-destination" placeholder="Destination"  name="r-route_to" value ={{r.route_to}}>
+                      </div>
+                      
+                      <div class = "row"></div>
+                        <div class = "col-sm-4">
+                          <input type="text" class="form-control" id="id-fare" placeholder="Fare"  name="r-fare" value ={{r.fare}}>
+                        </div>
+                     </div>
+                    </div>
+                </div>
+            <div class="modal-footer">  
+                <button type="submit" id = "btnUpdate" name = "btnUpdate" class="button">UPDATE</button>                                  
+                <button type="button" class="button btn-secondary" data-dismiss="modal">CLOSE</button>                          
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+
+      <!-- Modal DELETE-->
+      <div class="modal fade" id="exampleModal1-{{r.routeId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:rgb(115, 255, 255)">
+              <h5 class="modal-title" id="exampleModalLabel">DELETE RECORD</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form id="deleteForm" method="post" >
+            {% csrf_token %} 
+            <div class="modal-body">                       
+              <input type="text" name="rroute-Id" value = {{r.routeId}} hidden>
+              Are you sure you want to delete this record?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+              <button type="submit" id = "btnDelete" name = "btnDelete" class="btn btn-primary">YES</button>
+            </div>
+          </div>
+        </form>
+        </div>
+    </div>
+        {% endfor %}   
+  </tbody>
+</table>
+
+<div style = 'background-color:#FFDFD3;'>
+    <center>
+        <p>
+            <h2>
+                BEEP INFO
+            </h2>
+        </p>
+    </center>
+</div>
+<div>
+    <p>
+        <h5>
+          
+        </h5>
+    </p>
+</div>
+<table style = 'text-align:center' class = "table table-success table-striped text-center">
+    <thead>
+    <tr>
+     
+      <th class = "text-center">Color</th>
+      <th class = "text-center">Capacity</th>
+      <th class = "text-center">Beep Status</th>
+      <th class = "text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for bj in beepjeeps %}
+    <tr>
+     <!--
+          <th scope="col">Beep ID</th>
+      <th scope="col">Route ID</th>
+          <td>{{bj.beepId}}</td>
+      <td>{{bj.routeId_id}}</td>
+     -->
+      <td>{{bj.color}}</td>
+      <td>{{bj.capacity}}</td>
+      <td>{{bj.beepStatus}}</td>
+      <td>
+        <a type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#newModal2-{{bj.beepId}}">
+          VIEW
+      </a>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2-{{bj.beepId}}">
+          DELETE
+      </button>
+    </td>
+  </tr>
+
+   <!-- Modal VIEW-->
+  <div class="modal fade" id="newModal2-{{bj.beepId}}" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:rgb(115, 255, 255)">
+            <h5 class="modal-title", style="font-size: large; font-family: Trirong;">VIEW DETAILS</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="updateForm" method="post" >
+          {% csrf_token %}
+          <div class="modal-body">
+            <input type="text" name="beep-Id" value = {{bj.beepId}} hidden>
+            <div class="row" text-align ="center">
+              <div class="col-12" id="startup-tab-1">
+                  <div class = "row"></div>
+                    <div class = "col-sm-4">
+                      <input type="text" class="form-control" id="id-color" placeholder="Color" name="bj-color" value ={{bj.color}}>
+                    </div>
+
+                    <div class = "row"></div>
+                    <div class = "col-sm-4">
+                      <input type="text" class="form-control" id="id-capacity" placeholder="Capacity"  name="bj-capacity" value ={{bj.capacity}}>
+                    </div>
+                    
+                    <div class = "row"></div>
+                      <div class = "col-sm-4">
+                        <input type="text" class="form-control" id="id-beepStatus" placeholder="Beep Status"  name="bj-beepStatus" value ={{bj.beepStatus}}>
+                      </div>
+                   </div>
+                  </div>
+              </div>
+          <div class="modal-footer">  
+              <button type="submit" id = "btnUpdate" name = "btnUpdate" class="button">UPDATE</button>                                  
+              <button type="button" class="button btn-secondary" data-dismiss="modal">CLOSE</button>                          
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+
+    <!-- Modal DELETE-->
+    <div class="modal fade" id="exampleModal2-{{bj.beepId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:rgb(115, 255, 255)">
+            <h5 class="modal-title" id="exampleModalLabel">DELETE RECORD</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="deleteForm" method="post" >
+          {% csrf_token %} 
+          <div class="modal-body">                       
+            <input type="text" name="bbeep-Id" value = {{bj.beepId}} hidden>
+            Are you sure you want to delete this record?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+            <button type="submit" id = "btnDelete" name = "btnDelete" class="btn btn-primary">YES</button>
+          </div>
+        </div>
+      </form>
+      </div>
+  </div>
+        {% endfor %}   
+  </tbody>
+</table>
+
+<div style = 'background-color:#FFDFD3;'>
+    <center>
+        <p>
+            <h2>
+                TICKET
+            </h2>
+        </p>
+    </center>
+</div>
+<div>
+    <p>
+        <h5>
+          
+        </h5>
+    </p>
+</div>
+<table style = 'text-align:center' class = "table table-danger table-striped" style = "width:100%">
+    <thead>
+    <tr>
+      <th class = "text-center">Ticket ID</th> 
+      <!--
+      <th scope="col">User ID</th>
+      <th scope="col">Beep ID</th>
+      <th scope="col">Route ID</th>
+      -->
+    
+      <th class = "text-center">Mode Of Payment</th>
+      <th class = "text-center">Time Remains</th>
+      <th class = "text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+        {% for t in tickets %}
+    <tr>
+      <td>{{t.ticketId}}</td>
+    <!--  <td>{{t.userId_id}}</td>
+      <td>{{t.beepId_id}}</td>
+      <td>{{t.routeId_id}}</td>
+    -->
+      <td>{{t.modeOfPayment}}</td>
+      <td>{{t.validTime}}</td>
+      <td>
+        <a type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#newModal3-{{t.ticketId}}">
+          VIEW
+      </a>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3-{t.ticketId}}">
+          DELETE
+      </button>
+    </td>
+  </tr>
+
+   <!-- Modal VIEW-->
+  <div class="modal fade" id="newModal3-{{t.ticketId}}" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:rgb(115, 255, 255)">
+            <h5 class="modal-title", style="font-size: large; font-family: Trirong;">VIEW DETAILS</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="updateForm" method="post" >
+          {% csrf_token %}
+          <div class="modal-body">
+            <input type="text" name="ticket-Id" value = {{t.ticketId}} hidden>
+            <div class="row" text-align ="center">
+              <div class="col-12" id="startup-tab-1">
+                    <div class = "row"></div>
+                    <div class = "col-sm-4">
+                      <input type="text" class="form-control" id="id-modeOfPayment" placeholder="Mode Of Payment"  name="t-modeOfPayment" value ={{t.modeOfPayment}}>
+                    </div>
+                    
+                    <div class = "row"></div>
+                      <div class = "col-sm-4">
+                        <input type="text" class="form-control" id="id-validTime" placeholder="Valid Time"  name="t-validTime" value ={{t.validTime}}>
+                      </div>
+                   </div>
+                  </div>
+              </div>
+          <div class="modal-footer">  
+              <button type="submit" id = "btnUpdate" name = "btnUpdate" class="button">UPDATE</button>                                  
+              <button type="button" class="button btn-secondary" data-dismiss="modal">CLOSE</button>                          
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+
+    <!-- Modal DELETE-->
+    <div class="modal fade" id="exampleModal3-{{t.ticketId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:rgb(115, 255, 255)">
+            <h5 class="modal-title" id="exampleModalLabel">DELETE RECORD</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="deleteForm" method="post" >
+          {% csrf_token %} 
+          <div class="modal-body">                       
+            <input type="text" name="tticket-Id" value = {{t.ticketId}} hidden>
+            Are you sure you want to delete this record?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+            <button type="submit" id = "btnDelete" name = "btnDelete" class="btn btn-primary">YES</button>
+          </div>
+        </div>
+      </form>
+      </div>
+  </div>
+        {% endfor %}   
+  </tbody>
+</table>
+
+<script>
+$(document).ready(function (){
+ 
+    $('#ExampleTable').DataTable(
+   )
+    });
+</script>
+
+{% endblock content %}
