@@ -39,34 +39,16 @@
               <form action="" method="POST" class="form" role="form">
                 {% csrf_token %}
                 <span style="text-align: center;"> 
-                      <input class="form-control" id="id-firstname" name="firstname" placeholder="Firstname" type="text"
+                      <input class="form-control" id="id-email" name="email" placeholder="Email" type="text"
                           required autofocus />
                 </span> 
               <br>
                 <span style="text-align: center;">
-                      <input class="form-control" id="id-lastname" name="lastname" placeholder="Lastname" type="text" required />
+                      <input class="form-control" id="id-password" name="password" placeholder="Password" type="text" required />
                 </span> 
               <br>
-              <span style="text-align: center;"> 
-                <input class="form-control" id="id-location" name="location" placeholder="Location" type="text"/>
-              </span> 
-              <br>
-              <span style="text-align: center;">
-                <input class="form-control" id="id-destination" name="destination" placeholder="Destination" type="text"/>
-              </span>
-              <br>
-             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="color">
-                <option selected>Choose</option>
-                <option value="blue">Blue</option>
-                <option value="white">White</option>
-              </select>
-              <br>
-              <span style="text-align: center;">
-                <input class="form-control" id="id-modeOfPayment" name="modeOfPayment" placeholder="Payment" type="text"/>
-              </span>
-              <br>
               <button class="btn btn-lg btn-primary btn-block" type="submit">
-                sumbit</button>
+                Log In</button>
                 </div>
               </form>   
           </div> 

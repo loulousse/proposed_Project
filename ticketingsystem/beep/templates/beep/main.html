@@ -16,6 +16,20 @@
         p    {color: white;}  
         </style>  
           <legend ><a href=""><i class=""></i></a> Sign up!</legend>
+
+         
+}
+
+body{
+    background-image: url("beep/images/alo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #5C6DBF;
+}
+ 
 -->
 
 {% load static %}
@@ -23,14 +37,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link href="static/beep/images/alo.png" rel="icon">
         <title>
-            Beep Ticketing System
+            Conference Room Reservation System
         </title>
+
+        <link rel="stylesheet" href="{% static 'back.css' %}">
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">    
         
-        <link rel="stylesheet" href="{% static 'main.css' %}">
+       
         
         <style>
             h1{color: rgb(218, 22, 22);}

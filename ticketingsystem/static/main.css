@@ -1,11 +1,11 @@
 body{
-    background-image: url("beep/images/be1.jpg");
+    background-image: url("beep/images/photo.jfif");
     background-size: cover;
     background-repeat: no-repeat;
-    background-color:blueviolet;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #5C6DBF;
 }
 
 footer{
